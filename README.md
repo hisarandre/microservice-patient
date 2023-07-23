@@ -14,9 +14,12 @@
 To launch the app, you can run it locally or use docker.
 
 ### Run with docker
-Run `docker-compose up -d --build`
-This will start the app and the database.
-You can check on the configured server address : http://localhost:8083
+1. Make sure you have the required versions of Java and dependencies installed.
+2. Open a terminal or command prompt and navigate to the project directory.
+3. Run the following command to build the project and create an executable JAR file:
+   ` mvn package`
+4. Verify the jar was generated and the run docker `docker-compose up -d --build` .
+This will start the app and the database. You can check on the configured server address : http://localhost:8083
 
 ### Run local
 
