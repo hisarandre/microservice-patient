@@ -42,10 +42,10 @@ Launch the app :
 
 ## Testing
 
-Run the command for testing:
-- `mvn test`
-The jacoco report will be generated in target/site/index.html
-
+1. First, run a local database for testing : open the config/application.properties file in the test and change with your own password.
+2. Create the database by executing the following command: `CREATE DATABASE mediscreen_patient_test`;
+3. Run the command for testing: `mvn test`
+4. The jacoco report will be generated in target/site/index.html
 
 ## Endpoints
 
