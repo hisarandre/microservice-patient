@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  patientsql:
+    container_name: "patientsql"
+    image: 'mysql:8.0'
+    environment:
+      - 'MYSQL_DATABASE=mediscreen_patient'
+      - 'MYSQL_ROOT_PASSWORD=test'
+    volumes:
+      - ./src/main/resources/2_data.sql:/docker-entrypoint-initdb.d/2_data.sql
+      - ./src/main/resources/1_schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+    ports:
+      - '3307:3306'
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_as_ci
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 1s
+      retries: 5
+
+  patient:
+    container_name: "patient"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: patient:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - 'SPRING_DATASOURCE_URL=jdbc:mysql://patientsql/mediscreen_patient?serverTimezone=UTC'
+      - 'SPRING_DATASOURCE_USERNAME=root'
+      - 'SPRING_DATASOURCE_PASSWORD=test'
+    depends_on:
+      patientsql:
+        condition: service_healthy
