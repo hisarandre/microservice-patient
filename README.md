@@ -35,7 +35,7 @@ Launch the app :
    ` mvn package`
 4. Once the build is successful, you can launch the app using the following command:
    ` java -jar target/patient-0.0.1-SNAPSHOT.jar `
-   This will start the app on the configured server address : http://localhost:8083
+   This will start the app on the configured server address : http://localhost:8081
 
 ## Testing
 
